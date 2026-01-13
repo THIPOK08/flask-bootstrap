@@ -7,49 +7,39 @@
 {% block content %}
   <div class="container">
     <h1>{{title}}</h1>
-  <hr>
-  <div class="row">
-    <div class="col"></div>
-    <div class="col">
-     <a href="{{url_for('new_car')}}" class="btn btn-outline-success float-end">
-      <i class="bi bi-car-front"></i> Add New Car
-     </a>
+    <hr>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <a href="{{url_for('new_car')}}" class="btn btn-outline-success float-end">
+          <i class="bi bi-car-front"></i> Add New Car
+        </a>
+      </div>
     </div>
-  </div>
-  <table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Brand</th>
-      <th scope="col">Model</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    {for car in cars %}
-    <tr>
-      <th scope="row">1</th>
-      <td>{{car.band}}</td>
-      <td>{{car.model}}</td>
-      <td>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Brand</th>
+          <th scope="col">Model</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for car in cars %}
+          <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td>{{car.brand}}</td>
+            <td>{{car.model}}</td>
+            <td>
 
-      </td>
-     </tr>
-      {% endfor %}
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>John</td>
-      <td>Doe</td>
-      <td>@social</td>
-    </tr>
-  </tbody>
-</table>
-</div>
- 
+            </td>
+          </tr>
+        {% endfor %}
+        
+        
+        
+      </tbody>
+    </table>
+  </div>
 {% endblock %}
