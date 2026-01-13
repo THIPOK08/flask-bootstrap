@@ -16,21 +16,21 @@ def index():
 
 @app.route('/cars', methods=['GET', 'POST'])
 def show_cars():
-  if request.method == 'POST':
-    brand = request.form['brand']
-    # print(brand)
-    tmp_cars = []
-    for car in cars:
-      # print(car)
-      if brand in car['brand']:
-        tmp_cars.append(car)
-    return render_template('cars/cars.html',
-                         title='Show Cars by Brand Page',
-                         cars=tmp_cars)
-  
-  return render_template('cars/cars.html',
-                         title='Show All Cars Page',
-                         cars=cars)
+    if request.method == 'POST':
+        # 1. รับค่าค้นหาและเปลี่ยนเป็นตัวพิมพ์เล็ก
+        brand = request.form.get('brand', '').lower() 
+        
+        tmp_cars = []
+        for car in cars:
+            # 2. ตรวจสอบโดยเปลี่ยนยี่ห้อรถใน List เป็นตัวพิมพ์เล็กก่อนเปรียบเทียบ
+            if brand in car['brand'].lower():
+                tmp_cars.append(car)
+                
+        return render_template('cars/cars.html', 
+                               title='Show Cars by Brand: ' + request.form.get('brand'), 
+                               cars=tmp_cars)
+    
+    return render_template('cars/cars.html', title='Show All Cars Page', cars=cars)
 
 @app.route('/cars/new', methods=['GET', 'POST'])
 def new_car():
